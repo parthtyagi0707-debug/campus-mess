@@ -284,25 +284,6 @@ Smooth animations using Framer Motion.
 
 Use loading skeletons and toast notifications.
 
----
-
-# Code Quality
-
-Generate:
-
-* Complete folder structure
-* Components
-* Pages
-* APIs
-* SQL schema
-* RLS policies
-* Authentication
-* Seed data
-* Error handling
-* Validation
-* TypeScript types
-* Clean reusable code
-
 
 
 git clone <this-repository-url>
