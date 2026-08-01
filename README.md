@@ -1,12 +1,5 @@
 # Mess Manager Pro
 
-# Build a Complete Smart Mess Management System (Production Ready)
-
-You are an expert Senior Full Stack Software Engineer, UI/UX Designer, Database Architect, and DevOps Engineer.
-
-I want you to build a **complete production-ready Smart Mess Management System** for a university hostel.
-
-This is **not a prototype**. Do **not** generate placeholder pages, dummy buttons, fake APIs, or incomplete features. Every feature must be fully functional and connected to the database.
 
 ## Technology Stack
 
