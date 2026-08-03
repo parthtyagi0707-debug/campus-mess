@@ -23,6 +23,7 @@ import { Route as AuthenticatedVoteRouteImport } from './routes/_authenticated/v
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminMenuRouteImport } from './routes/_authenticated/admin.menu'
 import { Route as AuthenticatedAdminPollsRouteImport } from './routes/_authenticated/admin.polls'
+import { Route as AuthenticatedAdminReviewsRouteImport } from './routes/_authenticated/admin.reviews'
 import { Route as AuthenticatedAdminScanRouteImport } from './routes/_authenticated/admin.scan'
 
 const IndexRoute = IndexRouteImport.update({
@@ -95,6 +96,12 @@ const AuthenticatedAdminPollsRoute = AuthenticatedAdminPollsRouteImport.update({
   path: '/polls',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminReviewsRoute =
+  AuthenticatedAdminReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminScanRoute = AuthenticatedAdminScanRouteImport.update({
   id: '/scan',
   path: '/scan',
@@ -114,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/vote': typeof AuthenticatedVoteRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/polls': typeof AuthenticatedAdminPollsRoute
+  '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
   '/admin/scan': typeof AuthenticatedAdminScanRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -129,6 +137,7 @@ export interface FileRoutesByTo {
   '/vote': typeof AuthenticatedVoteRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/polls': typeof AuthenticatedAdminPollsRoute
+  '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
   '/admin/scan': typeof AuthenticatedAdminScanRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
 }
@@ -147,6 +156,7 @@ export interface FileRoutesById {
   '/_authenticated/vote': typeof AuthenticatedVoteRoute
   '/_authenticated/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/_authenticated/admin/polls': typeof AuthenticatedAdminPollsRoute
+  '/_authenticated/admin/reviews': typeof AuthenticatedAdminReviewsRoute
   '/_authenticated/admin/scan': typeof AuthenticatedAdminScanRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
@@ -165,6 +175,7 @@ export interface FileRouteTypes {
     | '/vote'
     | '/admin/menu'
     | '/admin/polls'
+    | '/admin/reviews'
     | '/admin/scan'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/vote'
     | '/admin/menu'
     | '/admin/polls'
+    | '/admin/reviews'
     | '/admin/scan'
     | '/admin'
   id:
@@ -197,6 +209,7 @@ export interface FileRouteTypes {
     | '/_authenticated/vote'
     | '/_authenticated/admin/menu'
     | '/_authenticated/admin/polls'
+    | '/_authenticated/admin/reviews'
     | '/_authenticated/admin/scan'
     | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
@@ -307,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPollsRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/reviews': {
+      id: '/_authenticated/admin/reviews'
+      path: '/reviews'
+      fullPath: '/admin/reviews'
+      preLoaderRoute: typeof AuthenticatedAdminReviewsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/scan': {
       id: '/_authenticated/admin/scan'
       path: '/scan'
@@ -320,6 +340,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminMenuRoute: typeof AuthenticatedAdminMenuRoute
   AuthenticatedAdminPollsRoute: typeof AuthenticatedAdminPollsRoute
+  AuthenticatedAdminReviewsRoute: typeof AuthenticatedAdminReviewsRoute
   AuthenticatedAdminScanRoute: typeof AuthenticatedAdminScanRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -327,6 +348,7 @@ interface AuthenticatedAdminRouteChildren {
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminMenuRoute: AuthenticatedAdminMenuRoute,
   AuthenticatedAdminPollsRoute: AuthenticatedAdminPollsRoute,
+  AuthenticatedAdminReviewsRoute: AuthenticatedAdminReviewsRoute,
   AuthenticatedAdminScanRoute: AuthenticatedAdminScanRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }
