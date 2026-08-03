@@ -130,7 +130,15 @@ function AdminMenuPage() {
 
   const seedWeek = useMutation({
     mutationFn: async () => {
-      const rows = [] as Record<string, unknown>[];
+      const rows: {
+        slot_date: string;
+        meal: MealType;
+        menu: string;
+        capacity: number;
+        start_time: string;
+        end_time: string;
+        booking_cutoff_minutes: number;
+      }[] = [];
       const existing = new Set((slots ?? []).map((s) => `${s.slot_date}|${s.meal}`));
       for (let i = 0; i < 7; i += 1) {
         const date = addDays(today, i);
