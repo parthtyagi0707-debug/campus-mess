@@ -103,9 +103,9 @@ function AdminMenuPage() {
 
   const updateSlot = useMutation({
     mutationFn: async (input: { id: string; menu?: string; capacity?: number }) => {
-      const patch: Record<string, unknown> = {};
-      if (input.menu !== undefined) patch['menu'] = input.menu.slice(0, 600);
-      if (input.capacity !== undefined) patch['capacity'] = input.capacity;
+      const patch: { menu?: string; capacity?: number } = {};
+      if (input.menu !== undefined) patch.menu = input.menu.slice(0, 600);
+      if (input.capacity !== undefined) patch.capacity = input.capacity;
       const { error } = await supabase.from("meal_slots").update(patch).eq("id", input.id);
       if (error) throw error;
     },
