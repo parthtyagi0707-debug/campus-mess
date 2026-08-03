@@ -21,6 +21,7 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedReviewsRouteImport } from './routes/_authenticated/reviews'
 import { Route as AuthenticatedVoteRouteImport } from './routes/_authenticated/vote'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminAiRouteImport } from './routes/_authenticated/admin.ai'
 import { Route as AuthenticatedAdminMenuRouteImport } from './routes/_authenticated/admin.menu'
 import { Route as AuthenticatedAdminPollsRouteImport } from './routes/_authenticated/admin.polls'
 import { Route as AuthenticatedAdminReviewsRouteImport } from './routes/_authenticated/admin.reviews'
@@ -86,6 +87,11 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
+const AuthenticatedAdminAiRoute = AuthenticatedAdminAiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
 const AuthenticatedAdminMenuRoute = AuthenticatedAdminMenuRouteImport.update({
   id: '/menu',
   path: '/menu',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/reviews': typeof AuthenticatedReviewsRoute
   '/vote': typeof AuthenticatedVoteRoute
+  '/admin/ai': typeof AuthenticatedAdminAiRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/polls': typeof AuthenticatedAdminPollsRoute
   '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/reviews': typeof AuthenticatedReviewsRoute
   '/vote': typeof AuthenticatedVoteRoute
+  '/admin/ai': typeof AuthenticatedAdminAiRoute
   '/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/admin/polls': typeof AuthenticatedAdminPollsRoute
   '/admin/reviews': typeof AuthenticatedAdminReviewsRoute
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/reviews': typeof AuthenticatedReviewsRoute
   '/_authenticated/vote': typeof AuthenticatedVoteRoute
+  '/_authenticated/admin/ai': typeof AuthenticatedAdminAiRoute
   '/_authenticated/admin/menu': typeof AuthenticatedAdminMenuRoute
   '/_authenticated/admin/polls': typeof AuthenticatedAdminPollsRoute
   '/_authenticated/admin/reviews': typeof AuthenticatedAdminReviewsRoute
@@ -173,6 +182,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reviews'
     | '/vote'
+    | '/admin/ai'
     | '/admin/menu'
     | '/admin/polls'
     | '/admin/reviews'
@@ -189,6 +199,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/reviews'
     | '/vote'
+    | '/admin/ai'
     | '/admin/menu'
     | '/admin/polls'
     | '/admin/reviews'
@@ -207,6 +218,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/reviews'
     | '/_authenticated/vote'
+    | '/_authenticated/admin/ai'
     | '/_authenticated/admin/menu'
     | '/_authenticated/admin/polls'
     | '/_authenticated/admin/reviews'
@@ -306,6 +318,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/ai': {
+      id: '/_authenticated/admin/ai'
+      path: '/ai'
+      fullPath: '/admin/ai'
+      preLoaderRoute: typeof AuthenticatedAdminAiRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/menu': {
       id: '/_authenticated/admin/menu'
       path: '/menu'
@@ -338,6 +357,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminAiRoute: typeof AuthenticatedAdminAiRoute
   AuthenticatedAdminMenuRoute: typeof AuthenticatedAdminMenuRoute
   AuthenticatedAdminPollsRoute: typeof AuthenticatedAdminPollsRoute
   AuthenticatedAdminReviewsRoute: typeof AuthenticatedAdminReviewsRoute
@@ -346,6 +366,7 @@ interface AuthenticatedAdminRouteChildren {
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminAiRoute: AuthenticatedAdminAiRoute,
   AuthenticatedAdminMenuRoute: AuthenticatedAdminMenuRoute,
   AuthenticatedAdminPollsRoute: AuthenticatedAdminPollsRoute,
   AuthenticatedAdminReviewsRoute: AuthenticatedAdminReviewsRoute,
