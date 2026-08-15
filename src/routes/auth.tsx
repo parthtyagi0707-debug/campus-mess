@@ -154,7 +154,16 @@ function AuthPage() {
                 {loading === "signin" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                 Sign in
               </Button>
+              <button
+                type="button"
+                onClick={forgotPassword}
+                disabled={loading !== null}
+                className="w-full text-center text-xs text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline disabled:opacity-50"
+              >
+                {loading === "reset" ? "Sending reset link…" : "Forgot your password?"}
+              </button>
             </TabsContent>
+
 
             <TabsContent value="signup" className="space-y-4 pt-5">
               <div className="space-y-2">
