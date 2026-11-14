@@ -91,6 +91,25 @@ function AuthPage() {
     toast.success("Check your email to confirm your account.");
   }
 
+  async function forgotPassword() {
+    const parsedEmail = z.string().trim().email("Enter a valid email").max(255).safeParse(email);
+    if (!parsedEmail.success) {
+      toast.error(parsedEmail.error.issues[0]?.message ?? "Enter a valid email");
+      return;
+    }
+
+    setLoading("reset");
+    const { error } = await supabase.auth.resetPasswordForEmail(parsedEmail.data, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setLoading(null);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success("Password reset link sent. Check your email.");
+  }
+
   async function google() {
     setLoading("google");
     const result = await lovable.auth.signInWithOAuth("google", {
