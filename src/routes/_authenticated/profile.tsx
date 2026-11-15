@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
-import { claimAdminRole } from "@/lib/admin.functions";
 import { fetchMyBookings, fetchMyCheckIns } from "@/lib/api";
 import { useAuthUser, useProfile, useRole } from "@/lib/session";
 
@@ -81,9 +80,20 @@ function ProfilePage() {
   });
 
   const claim = useMutation({
-    mutationFn: () => claimAdminRole(),
+    mutationFn: async () => {
+      const { data, error } = await supabase.rpc("claim_first_admin");
+      if (error) {
+        if (error.code === "42501" || /unauthorized|permission/i.test(error.message)) {
+          throw new Error("Please sign in again to claim the manager role.");
+        }
+        throw new Error(error.message);
+      }
+      return data as string;
+    },
     onSuccess: (result) => {
-      toast.success(result.granted ? "You are now the mess manager." : "You already have admin access.");
+      if (result === "granted") toast.success("You are now the mess manager.");
+      else if (result === "already_admin") toast.info("You already have manager access.");
+      else toast.error("A mess manager already exists. Ask them to grant you access.");
       queryClient.invalidateQueries({ queryKey: ["role"] });
     },
     onError: (error: Error) => toast.error(error.message),
